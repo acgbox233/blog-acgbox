@@ -1,0 +1,371 @@
+p.cmb2-metabox-description{
+    font-style: normal!important
+}
+code{
+    border-radius: 2px
+}
+.cmb-type-radio-image .cmb2-radio-list {
+    display: block;
+    clear: both;
+    overflow: hidden;
+}
+.cmb-type-radio-image .cmb2-radio-list input[type="radio"] {
+    display: none;
+}
+.cmb-type-radio-image .cmb2-radio-list li {
+    display: inline-block;
+    margin-bottom: 0;
+}
+.cmb-type-radio-image .cmb2-radio-list input[type="radio"] + label {
+    border: 3px solid #eee;
+    display: block;
+    padding:5px;
+    background: #fff
+}
+.cmb-type-radio-image .cmb2-radio-list input[type="radio"] + label:hover,
+.cmb-type-radio-image .cmb2-radio-list input[type="radio"]:checked + label {
+    border-color: #cacaca;
+}
+.cmb-type-radio-image .cmb2-radio-list li label img {
+    display: block;
+}
+.cmb-type-radio-image .cmb-td{
+    max-width: 70%;
+}
+.col-left .cmb-type-radio-image .cmb-td{
+    max-width: 100%
+}
+.cmb-type-radio-image .cmb-td img{
+    width:100%
+}
+.cmb2-options-page .cmb-type-radio-image .cmb-td{
+    display: inherit
+}
+.set-hidden{
+    display: none;
+    background:#fafafa
+}
+.set-hidden .cmb-th label{
+    padding-left:20px
+}
+.field-menu_type .cmb2-list{
+    display: flex;
+    flex-wrap: wrap
+}
+.field-menu_type .cmb2-list li{
+    width:50%
+}
+.field-menu_type .cmb2-list li label{
+    margin:5px
+}
+.cmb-field-list .field-menu_type{
+    display: none
+}
+.menu-item-depth-0 .cmb-field-list .field-menu_type{
+    display: block
+}
+.menu-item-depth-0 .field-menu_img{
+    display: none
+}
+#aliyun-sms,#juhe-sms,#yunpian-sms,#sms-select,#luosimao,#zhongzheng-sms{
+    display: none
+}
+.sliders-module .cmb2-radio-list li,.posts-module .cmb2-radio-list li{
+    width:24%
+}
+.red{
+    color:red
+}
+#side-sortables .cmb2-list .cmb-type-radio-image label{
+    display: block
+}
+.widget .cmb-th{
+    padding:0
+}
+.widget .cmb-td{
+    padding:0
+}
+.widget .cmb-row{
+    margin:1em 0!important
+}
+.widget .cmb-th+.cmb-td{
+    float: none;
+    clear:both
+}
+.widget .cmb-th{
+    float: none;
+    clear:both
+}
+.cmb2-options-page .cmb-repeatable-group .cmb-th>.cmb2-metabox-description::before{
+    content:'#';
+    color:red;
+    font-size: 16px;
+    font-weight: 700
+}
+.cmb2-options-page .cmb2-metabox>.cmb-row.cmb-type-group > .cmb-td,.cmb2-postbox .cmb2-wrap>.cmb-field-list>.cmb-type-group > .cmb-td{
+    background: #f8fafb;
+    padding:10px
+}
+#post-style-5-box{
+    background: #f5f5f5;
+    padding:10px;
+    display: none
+}
+.cmb2-id-b2-single-post-video-money,.cmb2-id-b2-single-post-video-credit,.cmb2-id-b2-single-post-video-roles{
+    display: none
+}
+.cmb-type-radio-image .cmb2-radio-list li{
+    width:160px
+}
+#addtag  .cmb-type-radio-image  li label{
+    display: inline-block!important
+}
+.wp-admin .cmb-type-group .cmb-th+.cmb-td{
+    float: left;
+}
+.wp-admin .cmb2-postbox .cmb-th+.cmb-td{
+    float: left;
+}
+.cmb-type-group .cmb-repeat-group-field{
+    padding: 9px 0 16px 0!important;
+    margin:0!important
+}
+.nav-menus-php.wp-admin .cmb-type-radio-image .cmb2-radio-list li{
+    width:180px
+}
+.cmb-type-radio-image .cmb-td{
+    width:100%;
+    max-width: 100%
+}
+.cmb2-wrap .cmb-row{
+    margin-bottom:20px
+}
+.term-php .form-table .cmb-type-textarea .cmb-th+.cmb-td{
+    float: inherit
+}
+.term-php .form-table .cmb-row.cmb-type-textarea{
+    display: flex!important
+}
+.term-php .form-table .cmb-th{
+    min-width: 200px
+}
+.mobile .form-table .cmb-type-textarea .cmb-th+.cmb-td{
+    float: left;
+}
+.mobile .form-table .cmb-row.cmb-type-textarea{
+    display: inherit!important
+}
+.mobile .form-table .cmb-th{
+    min-width:auto
+}
+.filters-settings{
+    margin-top:20px
+}
+.filters-settings{
+    background:#fff;
+    padding:10px;
+    margin-bottom:20px
+}
+p.b2_video_box_desc{
+    font-size: 13px;
+    margin-top:20px
+}
+p.b2_video_box_desc code{
+        background: #f0f0f0;
+        border-radius:3px;
+}
+#cmb2-metabox-single_post_side_metabox .cmb-row:not(:last-of-type),#cmb2-metabox-single_post_side_metabox > div.cmb-row.cmb-type-multicheck-inline.cmb2-id-b2-post-roles.cmb-inline{
+    border: 0;
+    margin: 0;
+    padding: 0!important;
+}
+.cmb2-id-b2-post-money,.cmb2-id-b2-post-credit,.cmb2-id-b2-post-roles{
+    display: none
+}
+#side-sortables #cmb2-metabox-single_post_seo_side_metabox .cmb-row,#side-sortables #cmb2-metabox-single_post_seo_side_metabox .cmb-th{
+    padding:0!important;
+    border:0!important
+}
+#side-sortables #cmb2-metabox-single_post_seo_side_metabox .cmb-th label{
+    margin:0!important
+}
+.b2-smilies{
+    width:20px;
+    height:20px;   
+}
+.admin_page_b2_template_top .cmb-type-radio-image .cmb2-radio-list li{
+    width:240px
+}
+.user-none{
+    color:#999
+}
+.option-b2_orders_list.cmb2-options-page{
+    max-width: 100%;
+}
+.filter-row1 a{
+    margin-right:20px;
+    text-decoration: none
+}
+.filter-row1 a.current{
+    color: #000;
+    font-weight: bold
+}
+.post_id.column-post_id{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    height:32px
+}
+#wecatpay_normal,#xunhu,#wecatpay_hupijiao,#alipay_hupijiao,#alipay_normal,#mapay,#xorpay,#payjs,#yipay{
+    display: none
+}
+.admin_page_b2_verify_list .card{
+    position: relative;
+    margin: 0;
+    padding:8px 10px;
+    min-width: auto;
+    max-width: auto;
+    border: 0;
+    box-shadow:none;
+    background: none;
+    box-sizing: border-box;
+}
+.admin_page_b2_verify_list .card img{
+    width:100%
+}
+.green{
+    color:green
+}
+.red{
+    color:red
+}
+.cmb-type-radio-image.cmb2-id-index-group-1-collection-type .cmb2-radio-list li{
+    width:360px
+}
+#side-sortables .cmb-th, .inner-sidebar .cmb-th{
+    margin-bottom:0!important;
+    padding-bottom:0!important
+}
+#side-sortables .cmb-th label, .inner-sidebar .cmb-th label{
+    margin-bottom:0!important
+}
+#side-sortables .cmb2-wrap>.cmb-field-list>.cmb-row, .inner-sidebar .cmb2-wrap>.cmb-field-list>.cmb-row{
+    padding:.5em 0!important;
+    border:0!important
+}
+#side-sortables .cmb-row .cmb2-metabox-description, .inner-sidebar .cmb-row .cmb2-metabox-description{
+    padding-bottom:0!important
+}
+#shop_price_metabox,#shop_lottery,#shop_exchange{
+    display: none;
+}
+.cmb2-id-shop-xuni-cards-resout,.cmb2-id-shop-xuni-html-resout{
+    display: none;
+}
+#shop_xuni{
+    display: none;
+}
+.cmb2-id-shop-xuni-html-resout{
+    border-bottom:0!important
+}
+.cmb-row .cmb-repeatable-grouping h3{
+    cursor: all-scroll;
+}
+#adminmenu li#menu-posts-shop{
+    margin-top:13px
+}
+.request-replay{
+    width:600px
+}
+.request-replay textarea{
+    min-height: 300px;
+    width:100%
+}
+.request-table li{
+    border-bottom:1px solid #ccc;
+    padding:10px;
+    background: #fff;
+}
+.request-content{
+    padding: 10px 0;
+    font-size: 16px;
+}
+.request-content pre{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.request-date{
+    font-size: 13px;
+    margin: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 5px 0;
+}
+.request-table .to{
+    background-color: #e9fbff;
+}
+.request-content img{
+    max-width: 200px;
+    display: block;
+    margin-top:20px
+}
+.request-nav a{
+    margin-right:20px
+}
+.cmb-type-group .cmb-row .cmbhandle, .cmb2-postbox .cmb-row .cmbhandle{
+    right: -1em;
+    text-align: right;
+}
+.cmb2-metabox .cmbhandle{
+    width: 64px!important;
+    height: 37px!important;
+    z-index: 100;
+}
+.cmb2-metabox .cmbhandle:before{
+    right:0!important
+}
+.cmb2-id-b2-single-post-style .cmb2-radio-list li{
+    width:100px
+}
+.wp-core-ui .attachment.attachment--preview{
+    float: none;
+    width:100%
+}
+.lv-icon{
+    font-size: 12px;
+    font-weight: 400;
+    color: #808080;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 3px;
+    margin-right:6px
+}
+.lv-icon.user-vip{
+    height: 18px;
+    line-height: 18px;
+    padding:0 5px
+}
+.lv-icon.user-lv i{
+    font-size: 12px;
+    background-color: #dcdcdc;
+    color: #fff;
+    font-style: normal;
+    transform: scale(0.78);
+    display: inline-block;
+    height: 17px;
+    line-height: 17px;
+    padding: 0 2px;
+    text-transform: capitalize;
+}
+.lv-icon b{
+    font-weight: 400;
+}
+.lv-icon.user-vip i{
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    margin-right: 3px;
+    border: 2px solid #1e73be;
+    border-radius: 100%;
+    vertical-align: 0px;
+}

@@ -1,0 +1,495 @@
+@charset "UTF-8";
+/*
+Trix 1.2.1
+Copyright © 2019 Basecamp, LLC
+http://trix-editor.org/*/
+trix-editor {
+	margin: 0;
+	padding:20px;
+	min-height: 30em;
+  outline: none;
+  display: block;
+}
+
+trix-toolbar * {
+	box-sizing: border-box;
+}
+
+trix-toolbar .trix-button-row {
+	display: flex;
+	flex-wrap: nowrap;
+  justify-content: space-between;
+  padding:5px;
+  border-top:1px solid #ebebeb
+}
+
+trix-toolbar .trix-button-group {
+	display: flex;
+	justify-content: space-between;
+}
+trix-toolbar .trix-button-group:not(:first-child) {
+	border-left:1px solid #ebebeb
+}
+.trix-button-group{
+	margin-top:48px
+}
+.trix-button-group button{
+	width:48%;
+}
+@media (max-device-width: 768px) {
+	trix-toolbar .trix-button-group:not(:first-child) {
+		margin-left: 0;
+	}
+}
+
+trix-toolbar .trix-button-group-spacer {
+	flex-grow: 1;
+}
+
+@media (max-device-width: 768px) {
+	trix-toolbar .trix-button-group-spacer {
+		display: none;
+	}
+}
+
+trix-toolbar .trix-button {
+	position: relative;
+	float: left;
+	color: #8590a6;
+	font-size: 0.75em;
+	font-weight: 600;
+	white-space: nowrap;
+	height: 26px;
+	width: 26px;
+	padding:0;
+	margin: 0 5px;
+  border: 1px solid transparent;
+	background: transparent;
+}
+trix-toolbar .trix-button--icon:hover{
+  background: #f6f6f6;
+  border-color: #ebebeb;
+}
+trix-toolbar .trix-button--icon[disabled]:hover{
+	background: transparent;
+	border-color: transparent;
+}
+trix-toolbar .trix-button:not(:first-child) {
+}
+
+trix-toolbar .trix-button:not(:disabled) {
+  cursor: pointer;
+  width:auto
+}
+
+trix-toolbar .trix-button:disabled {
+	color: rgba(0, 0, 0, 0.125);
+}
+
+trix-toolbar .trix-button--icon {
+	font-size: inherit;
+}
+
+@media (max-device-width: 768px) {
+	trix-toolbar .trix-button--icon::before {
+		right: 6%;
+		left: 6%;
+	}
+}
+
+trix-toolbar .trix-dialogs {
+	position: relative;
+	z-index: 2;
+}
+trix-toolbar [data-trix-dialog][data-trix-active]{
+	display: flex!important;
+}
+trix-toolbar [data-trix-dialog]{
+	display: flex!important;
+}
+trix-toolbar .trix-input--dialog,.dialogs-row input {
+    padding: 10px;
+    margin: 0;
+    border:0;
+    -moz-appearance: none;
+    width: 100%;
+}
+.trix-button-row > span{
+	margin:0
+}
+.attachment__toolbar .trix-button-row{
+	border:0
+}
+trix-toolbar .trix-input--dialog.validate:invalid {
+	box-shadow: #F00 0px 0px 1.5px 1px;
+}
+
+trix-toolbar .trix-button--dialog {
+	font-size: inherit;
+	padding: 0.5em;
+	border-bottom: none;
+}
+
+trix-toolbar .trix-dialogs .trix-button{
+  background-color: #f5f5f5;
+  height: 30px;
+  padding: 0 15px;
+  line-height: 30px;
+  display: block;
+  float: right;
+  margin:0;
+  margin-left:10px;
+  font-weight: 400;
+}
+
+trix-toolbar .trix-dialog__link-fields .trix-input {
+	flex: 1;
+}
+
+trix-toolbar .trix-button{
+  display: flex;
+  justify-content: center;
+}
+trix-toolbar .trix-button span{
+  display: none;
+  position: absolute;
+  background: #4f4f4f;
+  color: #fff;
+  margin: 0 auto;
+  top: 36px;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: 400;
+}
+trix-toolbar .trix-button span::after{
+	display: none;
+}
+trix-toolbar .trix-button span::before{
+	border-bottom-color:#4f4f4f;
+	left:initial;
+	top:-5px
+}
+trix-toolbar .trix-button:hover span{
+  display: flex;
+  justify-content: center
+}
+trix-toolbar .trix-button[disabled]:hover span{
+	display: none;
+}
+trix-editor [data-trix-mutable]:not(.attachment__caption-editor) {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+trix-editor [data-trix-mutable]::-moz-selection,
+trix-editor [data-trix-cursor-target]::-moz-selection, trix-editor [data-trix-mutable] ::-moz-selection {
+	background: none;
+}
+
+trix-editor [data-trix-mutable]::selection,
+trix-editor [data-trix-cursor-target]::selection, trix-editor [data-trix-mutable] ::selection {
+	background: none;
+}
+
+trix-editor [data-trix-mutable].attachment__caption-editor:focus::-moz-selection {
+	background: highlight;
+}
+
+trix-editor [data-trix-mutable].attachment__caption-editor:focus::selection {
+	background: highlight;
+}
+
+trix-editor [data-trix-mutable].attachment.attachment--file {
+	box-shadow: 0 0 0 2px highlight;
+	border-color: transparent;
+}
+
+trix-editor [data-trix-mutable].attachment img {
+	box-shadow: 0 0 0 2px highlight;
+	margin-bottom:3px
+}
+
+trix-editor .attachment {
+	position: relative;
+	text-align: center;
+}
+
+trix-editor .attachment:hover {
+	cursor: default;
+}
+
+trix-editor .attachment--preview .attachment__caption:hover {
+	cursor: text;
+}
+
+trix-editor .attachment__progress {
+	position: absolute;
+	z-index: 1;
+	height: 20px;
+	top: calc(50% - 10px);
+	left: 5%;
+	width: 90%;
+	opacity: 0.9;
+	transition: opacity 200ms ease-in;
+}
+
+trix-editor .attachment__progress[value="100"] {
+	opacity: 0;
+}
+
+trix-editor .attachment__caption-editor {
+	display: inline-block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	font-family: inherit;
+	line-height: inherit;
+	color: inherit;
+	text-align: center;
+	vertical-align: top;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-align: center;
+}
+.attachment__caption{
+	text-align: center;
+}
+trix-editor .attachment__toolbar {
+	position: absolute;
+	z-index: 1;
+	top: -0.9em;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+trix-editor .trix-button-group {
+	display: inline-flex;
+}
+
+trix-editor .trix-button {
+	position: relative;
+	float: left;
+	color: #666;
+	white-space: nowrap;
+	font-size: 80%;
+	padding: 0 0.8em;
+	margin: 0;
+	outline: none;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+}
+
+trix-editor .trix-button:not(:first-child) {
+	border-left: 1px solid #ccc;
+}
+
+trix-editor .trix-button.trix-active {
+	background: #cbeefa;
+}
+
+trix-editor .trix-button:not(:disabled) {
+	cursor: pointer;
+}
+
+.trix-button--icon-decrease-nesting-level,.trix-button--icon-increase-nesting-level {
+	display: none;
+}
+
+trix-editor .trix-button--remove {
+	text-indent: -9999px;
+	display: inline-block;
+	padding: 0;
+	outline: none;
+	width: 1.8em;
+	height: 1.8em;
+	line-height: 1.8em;
+	border-radius: 50%;
+	background-color: #fff;
+}
+
+trix-editor .trix-button--remove::before {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.7;
+	content: "";
+	background-image: url(data:image/svg+xml,%3Csvg%20height%3D%2224%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M19%206.4L17.6%205%2012%2010.6%206.4%205%205%206.4l5.6%205.6L5%2017.6%206.4%2019l5.6-5.6%205.6%205.6%201.4-1.4-5.6-5.6z%22%2F%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 90%;
+}
+span[data-trix-serialize="false"]{
+	display: none!important;
+}
+trix-editor .trix-button--remove:hover {
+	border-color: #333;
+}
+
+trix-editor .trix-button--remove:hover::before {
+	opacity: 1;
+}
+
+.trix-button--icon-attach {
+	display: none;
+}
+
+.trix-button--icon-undo,.trix-button--icon-redo {
+	display: none;
+}
+
+trix-editor .attachment__metadata-container {
+	position: relative;
+}
+
+trix-editor .attachment__metadata {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 2em;
+	transform: translate(-50%, 0);
+	max-width: 90%;
+	padding: 0.1em 0.6em;
+	font-size: 0.8em;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 3px;
+}
+
+trix-editor .attachment__metadata .attachment__name {
+	display: inline-block;
+	max-width: 100%;
+	vertical-align: bottom;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+trix-editor .attachment__metadata .attachment__size {
+	margin-left: 0.2em;
+	white-space: nowrap;
+}
+
+@charset "UTF-8";
+
+.trix-content {
+	line-height: 1.5;
+}
+
+.trix-content * {
+	box-sizing: border-box;
+}
+
+.trix-content h1 {
+	font-size: 1.2em;
+	line-height: 1.2;
+	margin: 0;
+}
+
+.trix-content blockquote {
+	margin: 0 0 0 0.3em;
+	padding: 0 0 0 0.6em;
+	border-left: 0.3em solid #ccc;
+}
+
+.trix-content pre {
+	display: inline-block;
+	width: 100%;
+	vertical-align: top;
+	font-family: monospace;
+	font-size: 0.9em;
+	margin: 0;
+	padding: 0.5em;
+	white-space: pre;
+	background-color: #eee;
+	overflow-x: auto;
+}
+
+.trix-content ul, .trix-content ol, .trix-content li {
+	margin: 0;
+	padding: 0;
+}
+
+.trix-content ul li, .trix-content ol li, .trix-content li li {
+	margin-left: 1em;
+}
+
+.trix-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+.trix-content .attachment {
+	display: inline-block;
+	position: relative;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.trix-content .attachment a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.trix-content .attachment a:hover, .trix-content .attachment a:visited:hover {
+	color: inherit;
+}
+
+.trix-content .attachment__caption {
+	padding: 0;
+	text-align: center;
+}
+
+.trix-content .attachment__caption .attachment__name + .attachment__size::before {
+	content: ' · ';
+}
+
+.trix-content .attachment--preview {
+	width: 100%;
+	text-align: center;
+}
+
+.trix-content .attachment--preview .attachment__caption {
+	color: #666;
+	font-size: 0.9em;
+	line-height: 1.2;
+}
+
+.trix-content .attachment--file {
+	color: #333;
+	line-height: 1;
+	margin: 0 2px 2px 0;
+	padding: 0.4em 1em;
+	border: 1px solid #bbb;
+	border-radius: 5px;
+}
+
+.trix-content .attachment-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.trix-content .attachment-gallery .attachment {
+	flex: 1 0 33%;
+	padding: 0 0.5em;
+	max-width: 33%;
+}
+
+.trix-content .attachment-gallery.attachment-gallery--2 .attachment, .trix-content .attachment-gallery.attachment-gallery--4 .attachment {
+	flex-basis: 50%;
+	max-width: 50%;
+}

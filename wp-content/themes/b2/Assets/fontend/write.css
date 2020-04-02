@@ -1,0 +1,510 @@
+.write .site-header-in{
+    position: relative;
+}
+.write .site .site-header-in{
+    transform:none
+}
+.write .header{
+    z-index: initial;
+}
+.write-thumb{
+    min-height: 300px;
+    position: relative;
+}
+/* #trix-toolbar{
+   position: relative;
+   z-index: 999; 
+} */
+.write-thumb label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color:rgba(26,26,26,.2);
+    position: absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    cursor: pointer;
+    flex-flow: column;
+}
+.write-thumb label p{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    margin-top:0px;
+    transition: all .2s;
+    font-size: 14px;
+}
+.write-thumb label:hover p{
+    opacity: 1;
+    visibility: visible;
+    margin-top: 30px;
+    transition: all .2s;
+}
+.write-thumb img{
+    width:100%
+}
+.write-textarea{
+    border:0;
+    font-size: 27px;
+    padding: 8px 10px;
+    resize:none;
+    display: block;
+    height:auto;
+    overflow:hidden
+}
+.trix-button-row{
+    border-bottom:1px solid #ebebeb
+}
+.write-title{
+    color:initial
+}
+.write-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding:20px;
+    margin-top:20px;
+    border-top:1px solid #f3f3f3
+}
+.write-select-row-top{
+    border-top:1px solid #ebebeb;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #fafafa;
+}
+.cat-picked span{
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: inset 0 0 9px rgba(204,204,204,.39);
+    margin-right:5px;
+}
+.cat-picked span:hover {
+    box-shadow: inset 0 0 9px rgba(204,204,204,.69);
+}
+.write-select-row-top select{
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    color:#555;
+    font-size: 13px;
+}
+.cat-picked{
+    flex-grow: 1;
+    padding:10px
+}
+.write-select-row-top textarea{
+    flex-grow: 1;
+}
+.write-select-row-top .write-select-title{
+    border-right: 1px solid #ebebeb;
+    width: 54px;
+    font-size: 12px;
+    color:#999;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right:10px
+}
+.write-select-row-top .write-select-box{
+    padding:10px
+}
+.write-select-row-top .title-label{
+    padding:18px 10px
+}
+.write-page .box{
+    border:0;
+    position: relative;
+}
+.trix-dialog--file{
+    display: flex;
+}
+.trix-dialog--file > .dialogs-row{
+    width:50%;
+    display: flex;
+    align-items: center;
+    margin-bottom:10px
+}
+.trix-dialog--file > .dialogs-row label{
+    width:50px;
+    text-align: right;
+    color:#999
+}
+.trix-dialog--file > .dialogs-row input{
+    flex-grow: 1;
+}
+.trix-dialog--file .dialogs-row:nth-child(3),.trix-dialog--file .dialogs-row:nth-child(1){
+    padding-right:20px
+}
+.trix-dialog--file .dialogs-row:nth-child(2),.trix-dialog--file .dialogs-row:nth-child(4){
+    padding-left:20px
+}
+.dialogs-button{
+    text-align:right;
+    width:100%
+}
+.trix-dialog--video .dialogs-row{
+    width:100%;
+    display: flex;
+    align-items: center;
+}
+trix-toolbar .trix-dialog--video .trix-dialog__link-fields{
+    flex-flow: column;
+}
+.trix-dialog.modal{
+    opacity: 0!important;
+    visibility: hidden!important;
+}
+.modal.trix-active{
+    display: flex!important;
+    align-items: center;
+    opacity: 1!important;
+    visibility: visible!important;
+	transform: perspective(1px) scale(1.0);
+	transition: visibility 0s linear 0s, opacity 0.15s 0s, transform 0.15s;
+}
+.trix-dialog__link-fields{
+    background-color: white;
+    width: 21rem;
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+}
+.trix-dialog-title{
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom:24px
+}
+.trix-dialog-input-box + .trix-dialog-input-box{
+    margin-top:10px
+}
+.trix-dialog-input{
+    display: flex;
+    align-items: center;
+    border:1px solid #ebebeb;
+    padding:0 0 0 10px;
+    border-radius: 3px;
+}
+.trix-dialog-input label{
+    font-size: 12px;
+    color:#999;
+    margin-right:10px
+}
+.dialog-desc{
+    font-size: 12px!important;
+    margin-top:4px;
+    text-align: right;
+    color:#ccc;
+    white-space:normal; 
+    margin-bottom:0!important
+}
+.editor-images-list{
+    display: flex;
+    flex-flow: wrap;
+}
+.editor-images-list li{
+    width:25%;
+    border:1px solid #fff;
+    position: relative;
+    cursor: pointer;
+}
+.image-upload-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ebebeb;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.image-table{
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: -10px;
+    justify-content: center;
+}
+.image-table > div{
+    margin-left:10px;
+    font-size: 12px;
+    padding:5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.image-table > div.picked::before{
+    content:'';
+    width:5px;
+    height:5px;
+    background: red;
+    position: absolute;
+    top:28px;
+    border-radius: 100%;
+}
+.image-upload-box svg{
+    fill:#ebebeb
+}
+.image-upload-box > div{
+    margin:30px 0
+}
+.image-upload-box:hover{
+    border-color:#8590a6
+}
+.image-upload-box:hover svg{
+    fill:#8590a6
+}
+.image-nav{
+    padding:10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.editor-file-none{
+    padding:40px 0;
+    text-align: center;
+    font-size: 13px;
+    color:#999
+}
+.editor-images-list li.picked::after{
+    content: '✓';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #f44336;
+    color: #fff;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: 1px solid #fff;
+}
+.editor-image{
+    height:0;
+    padding-top:100%;
+    position: relative;
+    background-color: #f5f5f5;
+}
+.editor-image img{
+    position: absolute;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0
+}
+.editor-image span{
+    position: absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    background-color: #ccc!important;
+}
+trix-toolbar{
+    position: relative;
+    z-index: 1;
+}
+.write-reset-thumb{
+    background: rgba(26,26,26,.75);
+    border-radius: 4px 0 0 0;
+    color:#fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 0 0 10px;
+}
+.write-reset-thumb .text{
+    padding:10px;
+    color:#fff;
+    display: initial;
+    position: initial;
+    line-height: 1;
+}
+.thumb-upload-loading{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background: rgba(0, 0, 0, 0.59);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.thumb-upload-loading .b2-loading:after{
+    background-size: 31px;
+}
+
+.write-select-row-title{
+    display: flex;
+    flex-flow: nowrap;
+    align-items: center;
+    border:1px dashed #ebebeb;
+    margin: 0 20px;
+    background: #fafafa;
+    padding:10px;
+    justify-content: space-between;
+    font-size: 12px;
+    color:#999;
+    margin-bottom:-1px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.write-role-settings{
+    margin:0 20px;
+    border:1px dashed #ebebeb;
+    background: #fff;
+    padding:10px;
+    margin-bottom:-1px
+}
+.write-role-settings p{
+    font-size: 12px;
+    color:#999;
+    margin-bottom:18px
+}
+.write-role-select select{
+    margin-bottom:18px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
+.write-role-settings-right p{
+    margin-bottom:3px
+}
+.write-normal-lv{
+    margin-bottom:10px
+}
+.write-normal-lv label{
+    margin-right:10px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.write-tags{
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+}
+.write-tags .b2-tag2{
+    margin-right:10px;
+    font-size: 22px;
+    line-height: 1;
+}
+.write-tags input{
+    border:0;
+    flex-grow: 1;
+    border-bottom: 1px solid #f3f3f3;
+}
+.write-tags .cat-picked{
+    padding:0;
+    flex-grow: 0;
+}
+.write-textarea-box textarea{
+    width: 100%;
+    padding: 10px;
+    display:block;
+    min-height: 80px;
+    resize: none;
+}
+.write-custom input[type="text"]{
+    width:40%
+}
+.write-custom label{
+    margin-right:10px;
+    font-size: 13px;
+}
+.write-custom textarea{
+    width:100%;
+    min-height: 100px;
+}
+trix-toolbar .trix-button-row{
+    background: #fff;
+}
+#trix-toolbar{
+    height:38px;
+}
+.write-loading{
+    display: flex;
+    min-height: 200px;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.allow-write{
+    position: absolute;
+    background: #ffffffe8;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    color: red;
+    padding-top: 200px;
+}
+/*移动端样式*/
+@media screen and (max-width:720px){
+    trix-toolbar .trix-button-group:not(:first-child){
+        border-left:0
+    }
+    #trix-toolbar{
+        height:74px
+    }
+    .write-thumb{
+        min-height: 160px;
+    }
+    .write-select-row-top .write-select-title{
+        display: none;
+    }
+    .write-select-row-top select{
+        max-width: 88px;
+        font-size: 12px;
+    }
+    .cat-picked span{
+        margin-bottom:5px
+    }
+    .cat-picked{
+        padding:10px 10px 5px
+    }
+    trix-toolbar .trix-button-row{
+        flex-flow: wrap;
+        justify-content: inherit;
+        padding: 0;
+    }
+    .trix-button-row > span{
+        border-bottom:1px solid #ebebeb;
+        flex-grow: 1;
+        margin-bottom:-1px
+    }
+    trix-editor{
+        padding:10px
+    }
+    .write-select-row-title{
+        margin:0 10px
+    }
+    .write-role-settings{
+        margin:0 10px
+    }
+    .write-bottom{
+        padding:10px;
+        justify-content: flex-end;
+    }
+    trix-toolbar .trix-button{
+        margin:5px
+    }
+    trix-toolbar .trix-button-group{
+        justify-content: space-around;
+    }
+}
