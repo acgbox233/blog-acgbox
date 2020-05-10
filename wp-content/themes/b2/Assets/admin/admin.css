@@ -67,7 +67,7 @@ code{
 .menu-item-depth-0 .field-menu_img{
     display: none
 }
-#aliyun-sms,#juhe-sms,#yunpian-sms,#sms-select,#luosimao,#zhongzheng-sms{
+#aliyun-sms,#juhe-sms,#yunpian-sms,#sms-select,#luosimao,#zhongzheng-sms,#tencent-sms{
     display: none
 }
 .sliders-module .cmb2-radio-list li,.posts-module .cmb2-radio-list li{
@@ -368,4 +368,13 @@ p.b2_video_box_desc code{
     border: 2px solid #1e73be;
     border-radius: 100%;
     vertical-align: 0px;
+}
+.cmb2-wrap .cmb-multicheck-toggle{
+    margin:0
+}
+#addtag .cmb-th{
+    padding:0
+}
+.cmb2-id-distribution-user-lv,.cmb2-id-distribution-money{
+    display: none;
 }

@@ -7,6 +7,7 @@
     flex-flow: wrap;
     align-items:stretch;
     overflow: hidden;
+    width:100%
 }
 .shop-slider-in .slider-in{
     position: absolute;
@@ -110,7 +111,8 @@
     display:flex;
     flex-flow: nowrap;
     white-space: nowrap;
-    width:100%
+    width:100%;
+    overflow: hidden;
 }
 .shop-cats-in{
     display: block;
@@ -157,7 +159,7 @@
     color:#fff;
     font-weight: 700;
     text-shadow: 0 1px 0 rgba(0,0,0,0.5);
-    font-size: 14px;
+    font-size: 17px;
     z-index: 2;
 }
 .shop-cats button.flickity-button{

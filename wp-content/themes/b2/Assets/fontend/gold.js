@@ -10,7 +10,11 @@ var b2gold = new Vue({
             type:'credit'
         },
         api:'getGoldList',
-        url:''
+        url:'',
+        show:false,
+        money:'',
+        locked:false,
+        success:false
     },
     mounted(){
         if(this.$refs.goldData){
@@ -107,6 +111,28 @@ var b2gold = new Vue({
                 b2DsBox.show = true
                 b2DsBox.showtype = 'cg'
             }
+        },
+        tx(){
+            if(this.locked) return
+            this.locked = true
+            this.$http.post(b2_rest_url+'cashOut','money='+this.money).then(res=>{
+                this.success = true
+                this.locked = false
+            }).catch(err=>{
+                this.$toasted.show(err.response.data.message,{
+                    theme: 'primary', 
+                    position: 'top-center', 
+                    duration : 4000,
+                    type:'error'
+                })
+                this.locked = false
+            })
+        },
+        close(){
+            this.show = !this.show
+        },
+        refresh(){
+            location.reload();
         }
     }
 })

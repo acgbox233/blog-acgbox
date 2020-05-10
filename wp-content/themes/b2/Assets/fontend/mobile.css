@@ -1,7 +1,4 @@
 @media screen and (max-width:768px){
-    body{
-        -webkit-overflow-scrolling: touch;
-    }
     .site-header{
         height:77px
     }
@@ -23,9 +20,6 @@
     }
     .mg-r{
         margin-right:4px
-    }
-    .b2-radius{
-        border-radius: 0;
     }
     .b2-mg{
         margin:4px
@@ -114,6 +108,9 @@
     }
     .header-banner-left .menu li a i{
         margin-top:0
+    }
+    .header-banner-left .menu li a{
+        font-size: 11px;
     }
     /*下载*/
     .download-item{
@@ -221,7 +218,8 @@
     }
     .top-menu ul li.depth-0.has_children>a .hob{
         left:0;
-        right:0
+        right:0;
+        bottom:-1px!important
     }
     .mobile-box.show-menu-box{
         display: block;
@@ -291,7 +289,8 @@
     }
     .user-panel-editor-button .user-follow{
         width:auto;
-        justify-content: center
+        justify-content: center;
+        margin:0
     }
     .user-follow button{
         margin:0
@@ -308,6 +307,14 @@
     }
     .slider-1 .slider-info-box h2{
         text-align: left!important;
+    }
+    .slider-1 .slider-1-carousel{
+        width:calc(100% - 30px)!important;
+        margin-right:5px
+    }
+    .slider-1.box {
+        background: none;
+        border-radius: 0;
     }
     .homw-row-full.module-sliders .slider-info-box{
         display: flex;
@@ -335,9 +342,20 @@
         padding:10px!important;
         justify-content: space-between;
     }
-    .top-menu-ul>li.depth-0 > a i{
+    .top-menu-ul>li.depth-0 > a i.b2-jt-down{
         position: absolute;
-        right:10px;
+        right: 0;
+        width: 50px;
+        text-align: right;
+        height: 28px;
+        top: 0;
+        padding: 8px;
+        font-size: 20px;
+    }
+    .top-menu ul li.depth-0.show .sub-menu{
+        height:100%;
+        padding: 10px;
+        border-top: 1px dashed #ccc;
     }
     .top-menu-ul > li.depth-0:first-child > a{
         color:#333!important;
@@ -348,17 +366,19 @@
     }
     .top-menu .top-menu-ul{
         display: block;
-        padding-bottom:40px
+        padding-bottom:40px;
+        border-radius: 3px;
+        overflow: hidden;
     }
     .logo-top .header-top{
         margin:10px auto
     }
     .top-menu ul li.depth-0 > a,.logo-top .top-menu ul li.depth-0 > a{
         display: inline-block;
-        background: #f5f5f5;
+        background: #fff;
         padding: 5px 10px;
-        font-size: 16px;
-        margin-bottom:8px;
+        font-size: 17px;
+        font-weight: 300;
         height:auto
     }
     .top-menu-ul > li.depth-0:first-child > a{
@@ -369,10 +389,15 @@
     }
     .b2-menu-3 .sub-menu-0 a{
         font-size: 16px;
-        margin-bottom:5px
+        margin-bottom:5px;
+        padding:6px 0
+    }
+    .b2-menu-3 .sub-menu-0 li li a{
+        padding:6px 10px
     }
     .top-menu ul li.depth-0{
-        display: block
+        display: block;
+        border-bottom:1px solid rgba(206, 206, 206, 0.2)
     }
     .has_children .sub-menu{
         position: relative;
@@ -381,7 +406,13 @@
         top:0;
         width: 100%;
         padding:10px;
-        justify-content: flex-start
+        justify-content: flex-start;
+    }
+    .mobile-box li.has_children .sub-menu{
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        margin:0
     }
     .b2-menu-4 .sub-menu-0{
         display: block;
@@ -411,16 +442,21 @@
         width: 25%;
         margin: 0;
         min-width: auto;
+        padding-right: 8px;
+        margin-bottom: 4px;
+    }
+    .b2-menu-1.show .sub-menu-0.sub-menu{
+        padding: 10px 2px 10px 10px!important
     }
     .b2-menu-1 .sub-menu-0 li a{
-        padding: 5px;
         height: auto;
         display: block;
         text-align: center;
     }
     .logo-left .mobile-box{
         padding:0;
-        margin:0
+        margin:0;
+        background: #e7e7e7;
     }
     .b2-menu-1 .sub-menu-0 li span{
         font-size: 11px;
@@ -428,7 +464,7 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
         overflow: hidden;
-        padding-bottom:3px
+        padding-bottom:0!important
     }
     .b2-menu-1 .sub-menu-0 li a img{
         max-width: 100%;
@@ -496,7 +532,9 @@
         display: flex;
         opacity: 1;
         visibility: visible;
-        left: 10px;
+        left: 0;
+        width:100%;
+        flex-flow: wrap;
     }
     .b2-menu-3 .sub-menu-0 li ul + ul{
         margin-top:10px
@@ -559,7 +597,6 @@
         transform: scale(1);
         margin-bottom:20px;
         box-shadow: none;
-        border: 1px solid #f3f3f3;
     }
     .has_children:hover .sub-menu{
         -webkit-transform: scale(1);
@@ -589,7 +626,6 @@
         justify-content: space-between;
         align-items: center;
         height: 44px;
-        border-bottom: 1px solid #f3f3f3;
         padding: 10px;
         position: fixed;
         z-index: 3;
@@ -650,14 +686,15 @@
     }
     .tax-search.tax-info-item{
         position: absolute;
-        bottom: 8px;
+        top: 48px;
         left: 5px;
         width: auto;
         right: 5px;
         margin-right: 0;
     }
     .tax-info-item .fliter-button{
-        color:initial
+        color:initial;
+        font-size: 12px;
     }
     /*幻灯*/
     .slider-info-box{
@@ -738,7 +775,9 @@
         margin-bottom:0
     }
     .collection-out>ul{
-        margin-right:0
+        margin-right:0;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
     }
     .collection-box{
         margin:0
@@ -769,7 +808,9 @@
     }
     .mobile-footer-menu.footer-fixed{
         position: fixed;
-        bottom:0
+        bottom:0;
+        padding-bottom: calc(constant(safe-area-inset-bottom) + 14px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 6px);
     }
     .post-carts-list-row button{
         width:20px
@@ -785,7 +826,7 @@
         padding:4px
     }
     .post-2 ul.b2_gap .item-in{
-        margin:4PX;
+        margin:4px;
     }
     .post-modules-top{
         flex-flow: column;
@@ -882,7 +923,6 @@
         font-size: 16px;
     }
     .post-3 .item-in{
-        padding:0;
         margin:8px
     }
     .post-3 .post-list-cat{
@@ -891,10 +931,17 @@
     .post-3 .post-info{
         padding: 0 0 0 10px;
         margin: 2px 0;
+        width:67%
     }
     .post-3.post-list .post-list-cat a{
         font-size: 12px;
         padding:0
+    }
+    .post-5 ul.b2_gap>li{
+        width:100%!important
+    }
+    .post-5 .item-in{
+        margin:12px
     }
     .slider-user{
         display: none;
@@ -1507,7 +1554,7 @@
         padding:20px 16px
     }
     .footer{
-        margin-bottom:55px
+        margin-bottom:50px
     }
     .footer a{
         font-size: 12px
@@ -1562,11 +1609,12 @@
         height:23px
     }
     .mobile-footer-menu a{
-        padding:0 9px;
+        padding: 0 8px 4px;
         display: block;
         text-align: center;
         line-height: 1;
         position: relative;
+        width: 100%;
     }
     .mobile-footer-menu a i{
         font-size: 20px;
@@ -1583,8 +1631,7 @@
     }
     .mobile-footer-left,.mobile-footer-right{
         display: flex;
-        flex-flow: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         width:100%;
         flex:1
     }
@@ -1677,7 +1724,7 @@
         margin-bottom:10px
     }
     .post-style-3-top .wrapper{
-        padding-bottom: 100px;
+        bottom: 72px;
     }
     .post-style-3-title h1{
         font-size: 18px;
@@ -1761,7 +1808,7 @@
         margin-left:6px
     }
     .post-style-5-top{
-        margin:-3px 0 0
+        margin:-4px 0 0
     }
     .post-style-2 i.b2-user{
         color:#fff
@@ -1775,10 +1822,36 @@
     .post-video-list-img{
         display: none;
     }
+    .author-page .news-item{
+        padding:8px
+    }
+    .user-sidebar-count li{
+        width:33.333333%;
+        padding:8px
+    }
+    .user-sidebar-count li p{
+        font-size: 20px;
+        margin:5px 0
+    }
+    #author-index .user-info p{
+        padding: 16px 8px;
+        font-size: 14px;
+    }
+    .user-item-name{
+        font-size: 14px;
+    }
+    .user-sidebar.h0{
+        overflow: initial;
+    }
     /*分类页面*/
     .tax-fliter-cat{
         z-index: 10;
-        top:47px
+        top:48px;
+        position: absolute;
+        display: none;
+    }
+    #fliter-show.tax-fliter-cat{
+        display: block;
     }
     .tax-fliter-hot{
         top:47px
@@ -1790,10 +1863,20 @@
         text-align: left
     }
     .filter-items{
-        margin-top:5px
+        margin-top:5px;
+        white-space: nowrap;
+        overflow-x: scroll;
+        display: block;
+        width: 100%;
+        height: 37px;
+        flex: auto;
+    }
+    .tax-info-item.mobile-show{
+        display: block;
     }
     .tax-header{
-        height:auto
+        height:auto;
+        margin-top:-4px
     }
     .tax-header .wrapper.box{
         padding:8px
@@ -1812,7 +1895,8 @@
     .filter-items a{
         font-size: 12px;
         margin-left:0;
-        margin-right:5px
+        margin-right:5px;
+        display: inline-block;
     }
     .filters-box ul li + li{
         margin-top:0
@@ -1836,59 +1920,36 @@
         right:10px;
         top:10px
     }
-    .user-panel{
-        padding:10px;
-        margin:0;
-        flex-flow: column;
-        align-items: center;
-        margin-top: -46px;
+    .mask-wrapper{
+        padding-top:30%
     }
     .user-panel .avatar{
-        border:0;
-        width:80px;
-        height:80px;
+        width: 80px;
+        height: 80px;
         max-width: 80px;
         min-width: 80px;
-        border-radius: 100%;
-        border: 3px solid #fff;
         cursor: pointer;
+        border: 5px solid #ffffff;
+        position: relative;
+        z-index: 4;
     }
     .user-panel .avatar:hover .editor-avatar{
         border-radius: 100%;
-    }
-    .user-panel .avatar:hover .editor-avatar span{
-        display: none
-    }
-    .user-panel-info{
-        margin:0;
-        padding:0;
-        margin-top: 14px;
     }
     .user-cover-button label.empty{
         padding:4px 6px;
         font-size: 12px
     }
-    .user-panel-info{
-        font-size: 17px;
-        text-align: center;
-        display: block;
-    }
     .user-panel-info p{
-        margin-bottom:20px
+        margin-top:10px
     }
-    .user-panel-info .user-page-lv{
-        position: absolute;
-        left: 16px;
-        top: 55px;
+    .user-panel-info h1{
         display: flex;
         flex-flow: column;
-        margin: 0;
+        font-size: 18px;
     }
-    .user-panel-info .lv-icon{
-        margin: 5px 0 0;
-        text-align: left;
-        padding:0;
-        font-size: 10px;
+    .user-panel-info h1 > span{
+        margin:0
     }
     .duk{
         display: none
@@ -1901,25 +1962,57 @@
         right:10px;
         top:56px
     }
-    .mask-wrapper{
-        padding-top:40%
-    }
     .user-panel-editor-button{
-        text-align: center
+        text-align: center;
+        position: initial;
+        margin-top:10px
     }
     .author-page-right{
         width:100%;
         margin:0;
+        margin-bottom:4px
     }
     .user-sidebar{
-        margin-bottom:8px
+        width: 62px;
+        display: inline-block;
+    }
+    .author-page-right-in{
+        display: block;
+        overflow-x: scroll;
+        white-space:nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .user-sidebar-info {
+        display: flex;
+        flex-flow: column;
+        margin:0 2px;
+        padding:16px 20px
+    }
+    .user-panel-info p{
+        text-align: center;
+        display: none;
+        
+    }
+    .user-sidebar-info p i{
+        display: block;
+        margin-bottom:5px;
+        margin-right:0
+    }
+    .user-sidebar-info p{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .author-sidebar-down{
+        display: none;
     }
     .author-page-left{
         width:100%;
         z-index: 2;
     }
     .author-table{
-        flex-flow: column-reverse;
+        flex-flow: column;
     }
     .author-comment-list li{
         padding:8px
@@ -1964,6 +2057,10 @@
     .author-edit-page .author-edit-list > li{
         flex-flow: column
     }
+    .author-edit-list{
+        margin-top:0;
+        margin-bottom:20px
+    }
     .user-edit-button{
         opacity: 1;
         visibility: visible
@@ -1987,7 +2084,7 @@
     }
     .user-panel-editor-button button,.user-panel-editor-button .button{
         font-size: 12px;
-        padding:4px 6px;
+        padding:6px 12px;
         font-weight: 400
     }
     table td{
@@ -2002,6 +2099,25 @@
     }
     .document-content .b2-pagenav{
         padding:0 8px
+    }
+    .user-page-lv{
+        display: flex;
+    }
+    .user-panel{
+        padding:0 10px 30px;
+        margin-top: -24px;
+    }
+    .user-panel-info{
+        padding-left:10px;
+        padding-top:29px;
+        align-items:initial
+    }
+    .user-sidebar-count li i{
+        top: 2px;
+        font-size: 36px;
+    }
+    .user-panel-info h1 span{
+        margin-left:0
     }
     /*vip页面*/
     .vip-count ul li .vip-in{
@@ -2030,6 +2146,11 @@
     }
     .vip-footer{
         margin-top:20px
+    }
+    .shop-single-action-left a{
+        font-size: 17px;
+        font-weight: 700;
+        padding:10px 25px
     }
     /*菜单动画*/
     .menu-icon {
@@ -2081,7 +2202,7 @@
                 animation: animate-line-3 0.7s cubic-bezier(0.3, 1, 0.7, 1) forwards;
     }
     .b2-menu-4 ul ul li a img{
-        margin-right:10px
+        margin-right:5px
     }
     .no-animation {
         -webkit-animation: none !important;
@@ -2244,6 +2365,25 @@
     }
     .tags-page ul li a{
         padding:10px 5px
+    }
+    .weixin-bind {
+        text-align: center;
+    }
+    .weixin-bind .button{
+        margin-top:20px;
+        display: inline-block;
+    }
+    .distribution-build-input{
+        max-width:240px
+    }
+    .my-distribution-orders .distribution-order-money,.my-distribution-orders .distribution-order-ratio{
+        display: none;
+    }
+    .distribution-order-my,.distribution-order-lv{
+        width:20%
+    }
+    .my-distribution-partner ul li{
+        width:50%
     }
     @-webkit-keyframes animate-line-1 {
         0% {

@@ -182,6 +182,7 @@ var postType5 = new Vue({
                     'post_id':b2_global.post_id
                 }
                 b2DsBox.show = true;
+                b2DsBox.showtype = 'normal'
             }
         },
         credit(){
@@ -356,39 +357,104 @@ Vue.component('poster-box', {
     data(){
         return {
             poster:'',
-            isWeixin:false
+            isWeixin:false,
+            data:'',
+            loadedjs:false,
+            locked:false,
+            showLong:false,
+            thumb:'',
+            logo:''
         }
     },
     mounted(){
         this.isWeixin = b2isWeixin()
+        this.data = JSON.parse(this.$refs.poster.getAttribute('data-poster'))
+
+        let userData = JSON.parse(localStorage.getItem('userData'))
+
+        if(userData){
+            this.data.link = new URL(this.data.link)
+            this.data.link.searchParams.set('ref', userData.user_code)
+            this.data.link = this.data.link.href
+        }
+
+        const qr = new QRious({
+            value: this.data.link,
+            size:100,
+            level:'L'
+          });
+        this.data.qrcode = qr.toDataURL('image/jpeg')
     },
     methods:{
         close(val){
             this.$emit('close-form',val)
         },
         openWin(url,type){
-
             if(type == 'weibo'){
-                url = url+'&pic='+this.poster
+                url = url+'&pic='+this.data.thumb
             }else{
-                url = url+'&pics='+this.poster
+                url = url+'&pics='+this.data.thumb
             }
 
             openWin(url,type,500,500)
-        }
+        },
+        getbase64(){
+            if(this.locked) return;
+            this.locked = true 
+            this.$http.post(b2_rest_url+'urlToBase64','url='+this.data.logo).then(res=>{
+                this.logo = res.data;
+                this.$http.post(b2_rest_url+'urlToBase64','url='+this.data.thumb).then(res=>{
+                    this.thumb = res.data;
+                    setTimeout(()=>{
+                        this.html2canvas()
+                    }, 0);
+                });
+            });
+        },
+        html2canvas(){
+            var dom = this.$refs.posterContent,
+                w = dom.clientWidth,
+                h = dom.clientHeight;
+
+            html2canvas(dom,{
+                allowTaint: true,
+                taintTest: false,
+                dpi: 240,
+                scale: 2,
+                with:w,
+                height:h,
+                onrendered:(canvas)=>{
+                    canvas.mozImageSmoothingEnabled = false;
+                    canvas.webkitImageSmoothingEnabled = false;
+                    canvas.msImageSmoothingEnabled = false;
+                    canvas.imageSmoothingEnabled = false;
+                    this.poster = canvas.toDataURL();
+                    //console.log(imgData)
+                    //this.poster = canvas.convertToJPEG(canvas, canvas.width, canvas.height);
+                    //this.poster = URL.createObjectURL(this.base64ToBlob(imgData))
+                }
+            });
+        },
+        base64ToBlob(code) {
+            var parts = code.split(';base64,');
+            var contentType = parts[0].split(':')[1];
+            var raw = window.atob(parts[1]);
+            var rawLength = raw.length;
+
+            var uInt8Array = new Uint8Array(rawLength);
+
+            for (var i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+            return new Blob([uInt8Array], {type: contentType});
+        },
     },
     watch:{
         show(val){
-            if(val && !this.poster){
-                this.$https.post(b2_rest_url+'getPoster','id='+b2_global.post_id).then(res=>{
-                    this.poster = res.data+'?t='+Math.random()
-                }).catch(err=>{
-                    this.$toasted.show(err.response.data.message, { 
-                        theme: 'primary', 
-                        position: 'top-center', 
-                        duration : 4000,
-                        type:'error'
-                    })
+            if(val && !this.loadedjs){
+                b2loadScript(b2_global.site_info.site_uri+'/Assets/fontend/library/html2canvas.min.js',()=>{
+                    this.loadedjs = true
+                    this.getbase64()
                 })
             }
         }
@@ -398,7 +464,8 @@ Vue.component('poster-box', {
 var posterBox = new Vue({
     el:'#poster-box',
     data:{
-        show:false
+        show:false,
+        data:[]
     },
     methods:{
         close(val){
@@ -655,6 +722,7 @@ var b2Comment = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", b2_global.post_id)
+            formData.append("type", 'comment')
 
             let config = {
                 onUploadProgress: progressEvent=>{
@@ -825,10 +893,17 @@ var b2CommentList = new Vue({
 var b2DownloadBox = new Vue({
     el:'#download-box',
     data:{
-        list:[]
+        list:'',
+        login:false
     },
     mounted(){
         if(this.$refs.downloadBox){
+            let userData = JSON.parse(localStorage.getItem('userData'))
+            if(!userData){
+                this.login = false
+            }else{
+                this.login = true
+            }
             this.getList()
         }
     },
@@ -851,12 +926,22 @@ var b2DownloadBox = new Vue({
         login(){
             login.show = true
         },
-        go(link){
-            window.open(link)
+        go(link,allow){
+            if(!this.login && !allow){
+                login.show = true
+            }else if(!allow){
+                this.$toasted.show('没有权限下载', {
+                    theme: 'primary', 
+                    position: 'top-center', 
+                    duration : 4000,
+                    type:'error'
+                })
+            }else{
+                window.open(link)
+            }
         },
         pay(index){
-            let userData = JSON.parse(localStorage.getItem('userData'))
-            if(!userData){
+            if(!this.login){
                 login.show = true
             }else{
                 if(this.list[index].current_user.can.type == 'money'){
@@ -868,12 +953,12 @@ var b2DownloadBox = new Vue({
                         'order_key':index
                     }
                     b2DsBox.show = true;
+                    b2DsBox.showtype = 'normal'
                 }
             }
         },
         credit(index){
-            let userData = JSON.parse(localStorage.getItem('userData'))
-            if(!userData){
+            if(!this.login){
                 login.show = true
             }else{
                 if(this.list[index].current_user.can.type == 'credit'){
@@ -935,4 +1020,23 @@ if(typeof b2SingleMeta !== 'undefined'){
             documentVote.postData = newVal
         }
     })
+}
+
+function b2loadScript(url, callback){
+    var script = document.createElement ("script")
+    script.type = "text/javascript";
+    if (script.readyState){ //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" || script.readyState == "complete"){
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else { //Others
+        script.onload = function(){
+            callback();
+        };
+    }
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
 }

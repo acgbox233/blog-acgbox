@@ -450,7 +450,7 @@ trix-toolbar .trix-button-row{
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 2;
     color: red;
     padding-top: 200px;
 }

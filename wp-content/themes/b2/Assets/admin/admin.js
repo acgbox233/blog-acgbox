@@ -42,6 +42,20 @@ jQuery('#check_type').on('change', function() {
 	}
 })
 
+var b2distribution = jQuery('#distribution_conditions').find(':selected').val();
+if(b2distribution === '2'){
+	jQuery('.cmb2-id-distribution-user-lv').show()
+}
+
+jQuery('#distribution_conditions').on('change', function() {
+	var val = jQuery(this).find(':selected').val();
+	jQuery('.cmb2-id-distribution-user-lv').hide()
+
+	if(val ==='2'){
+		jQuery('.cmb2-id-distribution-user-lv').show()
+	}
+})
+
 function changeRadioChange(){
 	jQuery('.model-picked').find('input[type="radio"]').on('change',function(){
 		changeRaido();
@@ -180,6 +194,23 @@ alipay_type.forEach(e => {
 	}
 });
 
+var b2_paypal = jQuery('#paypal_open').find(':selected').val();
+if(b2_paypal == 1){
+	jQuery('#paypal_normal').show()
+}else{
+	jQuery('#paypal_normal').hide()
+}
+
+jQuery('#paypal_open').on('change', function() {
+	let val = jQuery(this).find(':selected').val();
+
+	if(val == 1){
+		jQuery('#paypal_normal').show()
+	}else{
+		jQuery('#paypal_normal').hide()
+	}
+})
+
 var checkType_wecatpay = jQuery('#wecatpay').find(':selected').val();
 let wecatpay_type = ['wecatpay_normal','xunhu','wecatpay_hupijiao','mapay','xorpay','payjs','yipay'];
 wecatpay_type.forEach(e => {
@@ -274,10 +305,10 @@ function b2Lvs(){
 	var lvs = document.querySelectorAll('#user_lv_group_repeat .cmb-repeatable-grouping');
 	if(lvs){
 		for (let i = 0; i < lvs.length; i++) {
-			lvs[i].querySelector('.cmb-group-title').innerText = lvs[i].querySelector('.cmb-repeat-group-field input').value
+			lvs[i].querySelector('.cmb-group-title .lv-name').innerText = lvs[i].querySelector('.cmb-repeat-group-field input').value
 			
 			jQuery('#user_lv_group_'+i+'_name').on('input', function(val) {
-				lvs[i].querySelector('.cmb-group-title').innerText = val.target.value
+				lvs[i].querySelector('.cmb-group-title .lv-name').innerText = val.target.value
 			});
 		}
 	}
@@ -285,10 +316,10 @@ function b2Lvs(){
 	var vips = document.querySelectorAll('#user_vip_group_repeat .cmb-repeatable-grouping');
 	if(vips){
 		for (let i = 0; i < vips.length; i++) {
-			vips[i].querySelector('.cmb-group-title').innerText = vips[i].querySelector('.cmb-repeat-group-field input').value
+			vips[i].querySelector('.cmb-group-title .lv-name').innerText = vips[i].querySelector('.cmb-repeat-group-field input').value
 
 			jQuery('#user_vip_group_'+i+'_name').on('input', function(val) {
-				vips[i].querySelector('.cmb-group-title').innerText = val.target.value
+				vips[i].querySelector('.cmb-group-title .lv-name').innerText = val.target.value
 			});
 		}
 	}
@@ -434,3 +465,18 @@ modulessortable()
 		}, 500);
 	});
 }
+
+var xunitype = jQuery('#b2_dark_room').find(':selected').val();
+if(xunitype == 1){
+		jQuery('#dark-room').show();
+}
+
+jQuery('#b2_dark_room').on('change', function() {
+		var val = jQuery(this).find(':selected').val();
+
+		if(val == 1){
+			jQuery('#dark-room').show();
+		}else{
+			jQuery('#dark-room').hide();
+		}
+})

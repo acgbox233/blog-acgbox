@@ -4,11 +4,10 @@ Theme URI: https://7b2.com/
 Author: Li Ruchun
 Author URI: https://7b2.com/
 Description: wordpress 高级商用主题，模块化管理，兼容微信的各种环境
-Version: 2.2.6
+Version: 2.3.6
 Text Domain: B2
 Tags: B2
 */
-@charset "UTF-8";
 a,abbr,acronym,address,applet,big,blockquote,body,caption,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,figure,font,form,h1,h2,h3,h4,h5,h6,html,iframe,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,ul,var {
 	border: 0;
 	font-family: inherit;
@@ -51,7 +50,7 @@ button,input[type="text"],input[type="password"],input[type="number"],textarea {
 	-webkit-appearance: none;
 	outline: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,STHeiti,WenQuanYi Micro Hei,Helvetica,Arial,sans-serif;
+	font-family: font-regular,'Helvetica Neue',sans-serif;
 	border:1px solid #ccc;
 	box-sizing: border-box
 }
@@ -59,6 +58,7 @@ body{
 	margin:0;
 	padding:0;
 	overflow-x: hidden;
+	-webkit-backface-visibility: hidden;
 }
 button.none{
 	padding:0;
@@ -70,7 +70,7 @@ select{
 	-webkit-appearance: none;
 	outline: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,STHeiti,WenQuanYi Micro Hei,Helvetica,Arial,sans-serif;
+	font-family:  font-regular,'Helvetica Neue',sans-serif;
 	padding:5px 10px;
 	cursor: pointer;
 	box-shadow: inset 0 0 9px rgba(204,204,204,.39);
@@ -178,7 +178,7 @@ button.empty,.button.empty{
 body{
 	line-height: 1.4;
 	color: rgba(0,0,0,.8);
-	font-family: PingFang SC,Hiragino Sans GB,Microsoft YaHei,STHeiti,WenQuanYi Micro Hei,Helvetica,Arial,sans-serif;
+	font-family:  font-regular,'Helvetica Neue',sans-serif;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -531,6 +531,7 @@ mark, ins {
 	box-shadow: 0 0 22px -12px rgba(0,36,100,.3) */
 	/* box-shadow: 0 0 0 1px #ebebed; */
 	box-shadow: 0 1px 3px rgba(26,26,26,.1);
+	/* box-shadow: 0px 5px 40px -1px rgba(2, 10, 18, 0.1); */
 }
 img.avatar{
 	background-color: #eee;
@@ -665,4 +666,53 @@ table td {
 @keyframes waveMove {
     from { background-position: 0 100%; }
     to   { background-position: -20px 100%; }
+}
+.waves {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 60px;
+    max-height: 60px;
+}
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+    .content {
+        height: 30vh;
+    }
+    h1 {
+        font-size: 24px;
+    }
 }

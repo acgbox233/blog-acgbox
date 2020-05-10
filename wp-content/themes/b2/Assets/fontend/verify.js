@@ -20,17 +20,23 @@ var B2VerifyPage = new Vue({
     },
     mounted(){
         if(this.$refs.verify){
-            let userData = JSON.parse(localStorage.getItem('userData'))
-            if(!userData){
-                login.show = true
-                return
-            }
-
             this.getUsers()
-            this.getMpQrcode()
+            let userData = JSON.parse(localStorage.getItem('userData'))
+            if(userData){
+                this.getMpQrcode()
+            }
         }
     },
     methods:{
+        goStep(step){
+            let userData = JSON.parse(localStorage.getItem('userData'))
+            if(userData){
+                this.step = step
+            }else{
+                login.show = 1
+                login.type = 1
+            }
+        },
         getUsers(){
             this.$http.post(b2_rest_url+'getVerifyUsers').then(res=>{
                 this.users = res.data
@@ -103,6 +109,7 @@ var B2VerifyPage = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", 1)
+            formData.append("type", 'verify')
 
             let config = {
                 onUploadProgress: progressEvent=>{

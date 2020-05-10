@@ -23,6 +23,7 @@
     padding: 6px 10px;
     background: #fff;
     font-size: 14px;
+    border-radius: 3px;
 }
 .post-news{
     position: relative;
@@ -344,7 +345,8 @@
 .newsflashes-nav-in button.empty{
     position: absolute;
     right:0;
-    top:11px
+    top:11px;
+    border-radius: 3px;
 }
 .newsflashes-nav-in .newsflashes{
     margin-right:100px;

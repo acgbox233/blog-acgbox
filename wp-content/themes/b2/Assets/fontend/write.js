@@ -191,6 +191,7 @@ var writeEditor = new Vue({
                     let formData = new FormData()
                     formData.append('file',event.target.files[i],event.target.files[i].name)
                     formData.append("post_id", 1)
+                    formData.append("type", 'post')
                     this.$http.post(b2_rest_url+'imageUpload',formData).then(res=>{
                         this.imageList[i].att_url = res.data.url
                         this.imageList[i].id = res.data.id
@@ -429,6 +430,7 @@ var writeFooter = new Vue({
                         type:'success'
                     })
                     this.locked = false
+                    location.href = res.data
                 }else{
                     location.href = res.data
                 }
@@ -503,5 +505,7 @@ addEventListener("trix-initialize", function(event) {
     return;
 
 })
-
+window.writeFooter = writeFooter
+window.writeHead = writeHead
+window.writeEditor = writeEditor
 }).call(this);

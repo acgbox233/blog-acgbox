@@ -65,6 +65,7 @@ var requestsPage = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", 1)
+            formData.append("type", 'request')
 
             let config = {
                 onUploadProgress: progressEvent=>{

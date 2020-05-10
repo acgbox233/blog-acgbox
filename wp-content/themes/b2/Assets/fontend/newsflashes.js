@@ -85,6 +85,7 @@ var b2Newsflashes = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", 1)
+            formData.append("type", 'newsflashes')
 
             let config = {
                 onUploadProgress: progressEvent=>{

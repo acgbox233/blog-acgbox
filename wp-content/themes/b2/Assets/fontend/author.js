@@ -21,6 +21,7 @@ var b2Author = new Vue({
             this.self = res.data.self
             this.followed = res.data.followed
             b2AuthorSidebar.userData = res.data
+            b2AuthorPageleft.userData = res.data
         })
     },
     methods:{
@@ -35,6 +36,7 @@ var b2Author = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", 1)
+            formData.append("type", type)
 
             let config = {
                 onUploadProgress: progressEvent=>{
@@ -154,6 +156,36 @@ var b2AuthorPost = new Vue({
                     this.empty = true
                 }
             })
+        },
+        delete(id){
+            if(!confirm('确实要删除这篇文章吗?')) return
+            this.$http.post(b2_rest_url+'deleteDraftPost','post_id='+id).then(res=>{
+                document.querySelector('#item-'+id).remove()
+            })
+        }
+    }
+})
+
+var b2AuthorNewsflashes = new Vue({
+    el:'#author-newsflashes',
+    data:{
+        selecter:'.author-comment-list ul',
+        api:'getNewsflashesList',
+        options:[],
+        list:''
+    },
+    mounted(){
+        if(this.$refs.authornewsflasheslist){
+            this.options.user_id = b2_author.author_id
+            this.options.term = 0
+            this.options.post_paged = parseInt(this.$refs.authornewsflasheslist.getAttribute('data-paged'))
+            this.$refs.commentPageNav.go(this.options.post_paged,'comment',true)
+        }
+    },
+    methods:{
+        get(data){
+            this.list = data.data
+            this.$refs.authornewsflasheslist.style.display = 'none'
         }
     }
 })
@@ -179,13 +211,15 @@ var b2AuthorFollow = new Vue({
     el:'#author-following',
     data:{
         api:'getAuthorFollowing',
-        options:[]
+        options:[],
+        pages:0
     },
     mounted(){
         if(this.$refs.authorFollow){
             this.options.user_id = b2_author.author_id
             this.options.number = 15
             this.options.post_paged = parseInt(this.$refs.authorFollow.getAttribute('data-paged'))
+            this.pages = parseInt(this.$refs.authorFollow.getAttribute('data-pages'))
             this.$refs.commentPageNav.go(this.options.post_paged,'comment',true)
         }
     },
@@ -211,13 +245,15 @@ var b2AuthorFollowers = new Vue({
     el:'#author-followers',
     data:{
         api:'getAuthorFollowers',
-        options:[]
+        options:[],
+        pages:0
     },
     mounted(){
         if(this.$refs.authorFollow){
             this.options.user_id = b2_author.author_id
             this.options.number = 15
             this.options.post_paged = parseInt(this.$refs.authorFollow.getAttribute('data-paged'))
+            this.pages = parseInt(this.$refs.authorFollow.getAttribute('data-pages'))
             this.$refs.commentPageNav.go(this.options.post_paged,'comment',true)
         }
     },
@@ -256,7 +292,8 @@ var b2AuthorCollections = new Vue({
     data:{
         api:'getUserFavoritesList',
         options:[],
-        locked:false
+        locked:false,
+        pages:0
     },
     mounted(){
         if(this.$refs.authorFollow){
@@ -264,6 +301,7 @@ var b2AuthorCollections = new Vue({
             this.options.number = 15
             this.options.sub = this.$refs.authorFollow.getAttribute('data-sub')
             this.options.post_paged = parseInt(this.$refs.authorFollow.getAttribute('data-paged'))
+            this.pages = parseInt(this.$refs.authorFollow.getAttribute('data-pages'))
             this.$refs.commentPageNav.go(this.options.post_paged,'comment',true)
         }
     },
@@ -328,20 +366,22 @@ var b2AuthorInv = new Vue({
 })
 
 var b2AuthorSidebar = new Vue({
-    el:'.author-page-right',
+    el:'#author-index',
     data:{
-        userData:[],
-        show:false
+        userData:[]
     },
     mounted(){
-        if(document.body.clientWidth > 720){
-            this.show = true
-        }
     },
     methods:{
-        showD(){
-            this.show = !this.show
-        }
+    }
+})
+
+var b2AuthorPageleft = new Vue({
+    el:'.author-page-right',
+    data:{
+        userData:[]
+    },
+    mounted(){
     }
 })
 
@@ -409,7 +449,6 @@ var b2AuthorEdit = new Vue({
                     type:'error'
                 })
             })
-
         }
     },
     methods:{
@@ -444,6 +483,7 @@ var b2AuthorEdit = new Vue({
 
             formData.append('file',file,file.name)
             formData.append("post_id", 1)
+            formData.append("type", 'qrcode')
 
             this.$http.post(b2_rest_url+'imageUpload',formData).then(res=>{
                 this.saveQrcode(type,res.data.id,res.data.url)

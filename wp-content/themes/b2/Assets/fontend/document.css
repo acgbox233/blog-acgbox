@@ -1,6 +1,6 @@
 .document-top{
     width:100%;
-    height:600px;
+    height:470px;
     background-color: #626f91;
     display: flex;
     align-items: center;
@@ -14,11 +14,11 @@
     left: 0;
 }
 .post-type-archive-document #primary-home{
-    margin-top:500px
+    margin-top:380px
 }
 .document-top h2{
     color: #fff;
-    margin: 0 auto 15px;
+    margin: 0 auto 30px;
     text-align: center;
     font-size: 26px;
     font-weight: normal;
@@ -53,7 +53,7 @@
     display: flex;
     flex-flow: column;
     position: relative;
-    width:20%;
+    width:25%;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -127,7 +127,7 @@
     background-color: #ececec
 }
 .b2-document-content h1{
-    font-size: 26px;
+    font-size: 30px;
 }
 .document-single-top{
     font-size: 13px;
@@ -228,7 +228,7 @@
     border:0
 }
 .document-left-item li{
-    margin-top:10px
+    margin-top:16px
 }
 .request-page h1{
     font-size: 22px;
@@ -348,17 +348,21 @@
 .request-box li.to i{
     color:red
 }
-.search-results .document-breadcrumb{
+.search .document-breadcrumb{
     padding: 10px;
     font-size: 13px;
     border-bottom: 1px solid #f3f3f3;
 }
-.search-results .document-breadcrumb span{
+.search .document-breadcrumb span{
     margin:0 5px
 }
 .request-page .ajax-pager{
     padding:10px;
     border-top:1px solid #f3f3f3
+}
+.document-left-item ul{
+    list-style: decimal;
+    margin-left:16px
 }
 @media screen and (max-width:768px){
     .document-top{
