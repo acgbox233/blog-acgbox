@@ -122,6 +122,16 @@ var B2ShopSingle = new Vue({
                 login.show = true
                 return
             }
+            if(this.data[id].commodity == 1 && !this.pickedAddress){
+                this.$toasted.show('请添加您的收货地址！', { 
+                    theme: 'primary', 
+                    position: 'top-center', 
+                    duration : 4000,
+                    type:'error'
+                })
+
+                return
+            }
             payCredit.data = {
                 'title':this.data[id].title,
                 'order_price':Calc.Mul(this.data[id].price.current_price,this.count),
@@ -195,7 +205,6 @@ var B2ShopSingle = new Vue({
         disabled(id){
             if(this.data == '') return true
             if(!this.data[id].can_buy.allow) return true
-            if(this.data[id].commodity == 1 && !this.pickedAddress) return true
             return false
         },
         //用户购买信息

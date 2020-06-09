@@ -49,6 +49,9 @@ var b2SingleMeta = new Vue({
                 b2Dmsg.userid = b2_global.author_id
                 b2Dmsg.show = true
             }
+        },
+        scroll(){
+            this.$scrollTo('#download-box', 300, {offset: -50})
         }
     }
 })
@@ -267,6 +270,11 @@ function b2ImgZooming(sele){
         
     }
 
+    var img2 = document.querySelectorAll('figure img')
+    for (let i = 0; i < img2.length; i++) {
+        b2zoom.listen(img2[i]);
+    }
+
 }
 document.addEventListener('DOMContentLoaded', function () {
     b2ImgZooming('.entry-content img')
@@ -322,6 +330,7 @@ function showHideContent(){
                         let parentSib = box[i].parentNode.previousElementSibling;
                         parentSib.style.backgroundImage = 'none'
                         parentSib.children[0].className = parentSib.children[0].className.replace('b2-suo','b2-kaisuo')
+                        box[i].nextElementSibling.children[0].style = 'color:green;font-weight:700'
                     }else{
                         box[i].innerHTML = res.data
                     }
@@ -625,8 +634,9 @@ var b2Comment = new Vue({
     mounted(){
         if(this.$refs.respond){
             this.resetUserInfo()
-
-            autosize(this.$refs.textarea);
+            setTimeout(()=>{
+                autosize(this.$refs.textarea_box);
+            })
         }
     },
     methods:{
@@ -670,7 +680,7 @@ var b2Comment = new Vue({
                 'comment_post_ID':b2_global.post_id,
                 'author':this.userData.nickname,
                 'email':this.userData.email,
-                'comment':this.$refs.textarea.value,
+                'comment':this.$refs.textarea_box.value,
                 'comment_parent':this.parentId,
                 'img':this.commentData
             }
@@ -681,7 +691,7 @@ var b2Comment = new Vue({
                 }else{
                     b2CommentList.$refs.commentList.insertAdjacentHTML('beforeend', res.data.list)
                 }
-                this.$refs.textarea.value = ''
+                this.$refs.textarea_box.value = ''
                 this.subLocked = false
                 this.resetmove()
                 b2CommentList.listImg()
@@ -730,7 +740,7 @@ var b2Comment = new Vue({
                 }
             }
 
-            this.$http.post(b2_rest_url+'imageUpload',formData,config).then(res=>{
+            this.$http.post(b2_rest_url+'fileUpload',formData,config).then(res=>{
                 if(res.data.status == 401){
                     this.$toasted.show(res.data.message, {
                         theme: 'primary', 
@@ -921,6 +931,7 @@ var b2DownloadBox = new Vue({
                     this.list[i].show_role = show
                 }
                 
+                this.$refs.gujia.style = "display:none"
             })
         },
         login(){

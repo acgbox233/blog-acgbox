@@ -46,7 +46,7 @@ var b2Author = new Vue({
 
             this.toast = this.$toasted.show('Loading...('+this.progress+'%)',{position: 'top-center'})
 
-            this.$http.post(b2_rest_url+'imageUpload',formData,config).then(res=>{
+            this.$http.post(b2_rest_url+'fileUpload',formData,config).then(res=>{
                 if(res.data.status == 401){
                     this.$toasted.show(res.data.message, {
                         theme: 'primary', 
@@ -485,7 +485,7 @@ var b2AuthorEdit = new Vue({
             formData.append("post_id", 1)
             formData.append("type", 'qrcode')
 
-            this.$http.post(b2_rest_url+'imageUpload',formData).then(res=>{
+            this.$http.post(b2_rest_url+'fileUpload',formData).then(res=>{
                 this.saveQrcode(type,res.data.id,res.data.url)
                 this.$refs[type].value = null
                 this.locked = false
@@ -544,6 +544,13 @@ var b2AuthorEdit = new Vue({
         saveNickName(){
             this.$http.post(b2_rest_url+'saveNickName','name='+this.userData.display_name+'&user_id='+b2_author.author_id).then(res=>{
                 if(res.data == true){
+                    let userData = JSON.parse(localStorage.getItem('userData'))
+                    if(userData['user_display_name']){
+                        userData['user_display_name'] = this.userData.display_name
+                        localStorage.setItem('userData',JSON.stringify(userData))
+                        userTools.userData = userData
+                    }
+                    document.querySelector('#userDisplayName').innerText = this.userData.display_name
                     this.show.nickname = false
                 }
             }).catch(err=>{

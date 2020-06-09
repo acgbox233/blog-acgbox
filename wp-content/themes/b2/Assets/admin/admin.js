@@ -480,3 +480,26 @@ jQuery('#b2_dark_room').on('change', function() {
 			jQuery('#dark-room').hide();
 		}
 })
+
+function b2getFilename(event){
+
+	let file = event.target.files[0]
+
+	var formData = new FormData();
+
+
+	formData.append('file',file,file.name)
+
+    jQuery.ajax({
+        url: cmb2_l10.ajaxurl+'?action=b2_insert_settings',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            alert('导入成功')
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+	});
+	
+}

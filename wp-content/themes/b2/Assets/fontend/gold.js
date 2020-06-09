@@ -149,7 +149,7 @@ var goldTop = new Vue({
     },
     methods:{
         getGoldTop(){
-            this.$http.get(b2_rest_url+'getGoldTop').then(res=>{
+            this.$http.post(b2_rest_url+'getGoldTop').then(res=>{
                 this.data = res.data
             }).catch(err=>{
                 this.$toasted.show(err.response.data.message,{

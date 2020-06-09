@@ -75,7 +75,7 @@ var requestsPage = new Vue({
 
             this.toast = this.$toasted.show('Loading...('+this.progress+'%)',{position: 'top-center'})
 
-            this.$http.post(b2_rest_url+'imageUpload',formData,config).then(res=>{
+            this.$http.post(b2_rest_url+'fileUpload',formData,config).then(res=>{
                 if(res.data.status == 401){
                     this.$toasted.show(res.data.message, {
                         theme: 'primary', 

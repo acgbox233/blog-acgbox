@@ -260,17 +260,19 @@ var carts = new Vue({
                 return
             }
 
-            if(this.showAddress === true && !this.pickedAddress){
+            if(this.showAddress === true && this.pickedAddress === ''){
+
                 this.$toasted.show('请添加您的收货地址！', { 
                     theme: 'primary', 
                     position: 'top-center', 
                     duration : 4000,
                     type:'error'
                 })
+                
                 return
             }
 
-            if(this.showEmail === true && !this.pickedEmail){
+            if(this.showEmail === true && this.pickedEmail == ''){
                 this.$toasted.show('请添加您的邮箱地址！', { 
                     theme: 'primary', 
                     position: 'top-center', 

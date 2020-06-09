@@ -8,13 +8,15 @@ var B2VerifyPage = new Vue({
         time:null,
         seconds:60,
         locked:false,
+        fileLocked:false,
         data:{
-            pay:false,
+            money:false,
             title:'',
             name:'',
             identification:'',
             phone:'',
-            card:''
+            card:'',
+            status:1
         },
         status:0
     },
@@ -43,10 +45,15 @@ var B2VerifyPage = new Vue({
             })
         },
         getMpQrcode(){
-            this.$http.post(b2_rest_url+'getMpQrcode').then(res=>{
+            this.$http.post(b2_rest_url+'getVerifyInfo').then(res=>{
                 this.mp = res.data
-                this.data.pay = res.data.pay
+                this.data.money = res.data.data.money
                 this.status = res.data.status
+                this.data = res.data.data
+                this.mp.status = res.data.data.mp
+                if(res.data.data.status == 2 || res.data.data.status == 4){
+                    this.step = 3
+                }
             })
         },
         checkSubscribe(){
@@ -94,8 +101,8 @@ var B2VerifyPage = new Vue({
         },
         getFile(event){
             if(event.target.files.length <= 0) return
-            if(this.locked == true) return
-            this.locked = true
+            if(this.fileLocked == true) return
+            this.fileLocked = true
 
             this.data.card = ''
 
@@ -117,10 +124,10 @@ var B2VerifyPage = new Vue({
                 }
             }
 
-            this.$http.post(b2_rest_url+'imageUpload',formData,config).then(res=>{
+            this.$http.post(b2_rest_url+'fileUpload',formData,config).then(res=>{
                 this.data.card = res.data.url
                 this.$refs.fileInput.value = null
-                this.locked = false;
+                this.fileLocked = false;
             }).catch(err=>{
                 this.$toasted.show(err.response.data.message, {
                     theme: 'primary', 
@@ -128,7 +135,7 @@ var B2VerifyPage = new Vue({
                     duration : 4000,
                     type:'error'
                 })
-                this.locked = false
+                this.fileLocked = false
                 this.progress = 0
                 this.$refs.fileInput.value = null
             })

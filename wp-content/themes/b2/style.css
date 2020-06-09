@@ -4,7 +4,7 @@ Theme URI: https://7b2.com/
 Author: Li Ruchun
 Author URI: https://7b2.com/
 Description: wordpress 高级商用主题，模块化管理，兼容微信的各种环境
-Version: 2.3.6
+Version: 2.4.2
 Text Domain: B2
 Tags: B2
 */
@@ -57,8 +57,8 @@ button,input[type="text"],input[type="password"],input[type="number"],textarea {
 body{
 	margin:0;
 	padding:0;
-	overflow-x: hidden;
 	-webkit-backface-visibility: hidden;
+	overflow-x: hidden;
 }
 button.none{
 	padding:0;
@@ -124,7 +124,8 @@ button,.button{
 	position: relative;
 	cursor: pointer;
 	font-size: 12px;
-	margin:0
+	margin:0;
+	white-space: nowrap;
 }
 button.text,.button.text{
 	background: none;
@@ -206,45 +207,6 @@ small {
 	font-size: 80%
 }
 
-blockquote:after,blockquote:before,q:after,q:before {
-	content: ""
-}
-
-blockquote,q {
-	-webkit-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-	quotes: none
-}
-
-blockquote {
-	background-color: #f4f4f4;
-    width: 100%;
-    padding: 16px 16px 24px 16px;
-    margin-bottom: 26px;
-}
-
-blockquote:before{
-	content: "";
-    display: block;
-    width: 24px;
-    height: 16px;
-    background-image: url(Assets/fontend/images/quote-icon-red.svg);
-    margin-bottom: 16px;
-}
-.entry-content blockquote p{
-	margin:0
-}
-.entry-content blockquote p + p{
-	margin-top:26px
-}
-blockquote small {
-	float: right;
-	margin-top: 25px;
-	color: rgba(0,0,0,.44);
-	font-style: italic
-}
-
 a:active,a:hover {
 	outline: 0;
 	transition: .3s;
@@ -282,7 +244,7 @@ img {
 	max-width: 100%;
 	height: auto;
 	object-fit: cover;
-	vertical-align: text-top;
+	vertical-align: bottom;
 }
 button::-moz-focus-inner {
 	border: 0;
@@ -365,13 +327,6 @@ pre {
 	overflow: auto;
 	padding: 1.6em;
 }
-
-code, kbd, tt, var {
-	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
-	font-size: 15px;
-	font-size: 0.9375rem;
-}
-
 abbr, acronym {
 	border-bottom: 1px dotted #666;
 	cursor: help;
@@ -586,82 +541,8 @@ table td {
 	padding-top: 0.5384615385em;
 }
 
-
-/**
- * 12.2 - Galleries
- */
-
-.gallery {
-	margin: 0 -1.1666667% 1.75em;
-}
-
-.gallery-item {
-	display: inline-block;
-	max-width: 33.33%;
-	padding: 0 1.1400652% 2.2801304%;
-	text-align: center;
-	vertical-align: top;
-	width: 100%;
-}
-
-.gallery-columns-1 .gallery-item {
-	max-width: 100%;
-}
-
-.gallery-columns-2 .gallery-item {
-	max-width: 50%;
-}
-
-.gallery-columns-4 .gallery-item {
-	max-width: 25%;
-}
-
-.gallery-columns-5 .gallery-item {
-	max-width: 20%;
-}
-
-.gallery-columns-6 .gallery-item {
-	max-width: 16.66%;
-}
-
-.gallery-columns-7 .gallery-item {
-	max-width: 14.28%;
-}
-
-.gallery-columns-8 .gallery-item {
-	max-width: 12.5%;
-}
-
-.gallery-columns-9 .gallery-item {
-	max-width: 11.11%;
-}
-
-.gallery-icon img {
-	margin: 0 auto;
-}
-
-.gallery-caption {
-	color: #686868;
-	display: block;
-	font-size: 13px;
-	font-size: 0.8125rem;
-	font-style: italic;
-	line-height: 1.6153846154;
-	padding-top: 0.5384615385em;
-}
-
-.gallery-columns-6 .gallery-caption,
-.gallery-columns-7 .gallery-caption,
-.gallery-columns-8 .gallery-caption,
-.gallery-columns-9 .gallery-caption {
-	display: none;
-}
 .anhover a:hover,.entry-content p > a:hover{
-	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath fill='none' stroke='%23333' d='M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3'/%3E%3C/svg%3E") repeat-x 0 100%;
-	background-size: 20px auto;
-	animation: waveMove .5s infinite linear;
-	text-decoration: none;
-	border:0
+	border-bottom:1px solid #333
 }
 @keyframes waveMove {
     from { background-position: 0 100%; }

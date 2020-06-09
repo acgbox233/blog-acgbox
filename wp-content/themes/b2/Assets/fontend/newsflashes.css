@@ -196,17 +196,21 @@
 }
 .news-item-content h2{
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 18px;
 }
 .news-item li{
     padding:16px 0 0 0;
     position: relative;
 }
+.news-list-box .news-item + .news-item .news-item-date{
+    margin-top: 10px;
+}
 .news-item-date{
-    font-size: 17px;
+    font-size: 12px;
     font-weight: 700;
-    padding:16px
+    padding: 16px;
+    background: #f9f9f9;
 }
 .news-item-date span{
     margin-left:5px

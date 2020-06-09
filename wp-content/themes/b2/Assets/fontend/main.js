@@ -57,6 +57,22 @@ document.ready = function (callback) {
     }
 }
 
+var topsearch = new Vue({
+    el:'.top-search',
+    data:{
+        type:'post',
+        data:'',
+        show:false
+    },
+    mounted(){
+        if(!this.$refs.topsearch) return
+        if(b2GetQueryVariable('type') && b2GetQueryVariable('s')){
+            this.type = b2GetQueryVariable('type')
+        }
+        this.data = JSON.parse(this.$refs.topsearch.getAttribute('data-type'))
+    }
+})
+
 var mobileMenu = new Vue({
     el:'#mobile-menu-button',
     data:{
@@ -78,7 +94,6 @@ var mobileMenu = new Vue({
                 }
             }
         }
-        window.addEventListener('popstate', this.goBack, false);
 
     },
     methods:{
@@ -107,32 +122,24 @@ var mobileMenu = new Vue({
         },
         showMenu(val){
             const menu = document.querySelector('#mobile-menu')
-                body = document.querySelector('body')
+                body = document.querySelector('html')
             if(val){
                 menu.className += ' show-menu-box'
                 body.className += ' m-open'
-                bodyScrollLock.lock(this.$refs.MobileMenu)
+                //bodyScrollLock.lock(this.$refs.MobileMenu)
                 this.show = true
             }else{
                 menu.className = menu.className.replace(' show-menu-box','')
-                body.className = body.className.replace(' m-open','')
-                bodyScrollLock.unlock(this.$refs.MobileMenu)
+                setTimeout(() => {
+                    body.className = body.className.replace(' m-open','')
+                }, 300);
+                //bodyScrollLock.unlock(this.$refs.MobileMenu)
                 this.show = false
             }
         },
-        goBack(e){
-            if(e.target.location.hash == '#showMenu'){
-                this.showMenu(true)
-            }else{
-                this.showMenu(false)
-            }
-        },
-        showAc(val){
-            if(val){
-                window.location.hash = '#showMenu';  
-            }else{
-                window.history.back()
-            }
+        showAc(){
+            this.show = !this.show
+            this.showMenu(this.show)
         }
     }
 })
@@ -199,6 +206,15 @@ var userTools = new Vue({
                 b2TaxTop.showFliter.hot = false
                 b2TaxTop.showFliter.cat = false
             }
+
+            if(typeof topsearch !== 'undefined'){
+                topsearch.show = false
+            }
+
+            if(typeof writeHead !== 'undefined'){
+                this.$toasted.clear()
+            }
+
             b2AsideBar.close()
         }
 
@@ -228,6 +244,17 @@ var userTools = new Vue({
                 this.loginOut()
             })
         }else{
+            //cookie兼容模式
+            if(b2_global.cookie_allow === '1'){
+                this.$https.get(b2_global.site_info.admin_ajax +'b2_get_login_token').then(res=>{
+                    if(res.data.status === 200){
+                        localStorage.setItem('userData',JSON.stringify(res.data.data))
+                        userTools.userData = res.data.data
+                        Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + userTools.userData.token
+                    }
+                })
+            }
+
             localStorage.setItem('ref',ref)
         }
     },
@@ -256,6 +283,46 @@ var userTools = new Vue({
             this.loginOut()
         }
     },
+})
+
+var topMenuLeft = new Vue({
+    el:'.change-theme',
+    data:{
+        theme:'light',
+        count:0,
+        login:false
+    },
+    mounted(){
+        if(userTools.userData.user_link){
+            this.login = true
+        }
+    },
+    methods:{
+        changeTheme(type){
+            this.theme = type
+        },
+        showBox(){
+            postPoBox.show = true
+        },
+        go(type){
+            if(type === 'orders'){
+                if(userTools.userData.user_link){
+                    window.location.href = userTools.userData.user_link+'/orders'
+                }else{
+                    login.show = true
+                    login.loginType = 1
+                }
+            }
+            if(type === 'requests'){
+                if(userTools.userData.user_link){
+                    window.location.href = b2_global.home_url+'/requests'
+                }else{
+                    login.show = true
+                    login.loginType = 1
+                }
+            }
+        }
+    }
 })
 
 var headerTools = new Vue({
@@ -1136,6 +1203,10 @@ Vue.component('page-nav',{
                     }
                 }
 
+                if(page != 1){
+                    this.url = b2removeURLParameter(this.url,'action')
+                }
+
                 //变更地址栏和title
                 if(!!(window.history && history.pushState)){
                     
@@ -1503,7 +1574,6 @@ var b2GG = new Vue({
                 this.ggdata = res.data
                 let timestamp = new Date().getTime()
                 timestamp = parseInt(timestamp/1000)
-                
                 if(timestamp - gg.close >= res.data.days*86400){
                     this.show = true
                 }
@@ -1856,7 +1926,7 @@ Vue.component('check-box',{
             this.$http.post(b2_rest_url+'payCheck','order_id='+order_id).then(res=>{
                 if(res.data === 'success'){
                     if(typeof(B2VerifyPage) !== "undefined"){
-                        B2VerifyPage.data.pay = true
+                        B2VerifyPage.data.money = true
                         this.close()
                     }else if(typeof(carts) !== "undefined"){
                         carts.step = 3
@@ -2190,6 +2260,7 @@ Vue.component('ds-box', {
                 if(this.jump == 'jump' && this.href == '') return true
                 if(this.locked == true) return true
                 if(this.payType == '') return true
+                if(this.payMoney == '') return true
             }else{
                 if(!this.card.number || !this.card.password) return true
             }
@@ -2221,6 +2292,7 @@ Vue.component('ds-box', {
                     }
                 }
                 this.locked = false
+
             }).catch(err=>{
                 this.$toasted.show(err.response.data.message, { 
                     theme: 'primary', 
@@ -2402,6 +2474,9 @@ Vue.component('ds-box', {
         },
         payType(val){
             this.data.pay_type = val
+        },
+        showtype(val){
+            console.log(val)
         }
     }
 })
@@ -2868,9 +2943,46 @@ var b2NewComment = new Vue({
 // }
 
 var b2mobileFooterMenu = new Vue({
-    el:'.mobile-footer-menu',
+    el:'#mobile-footer-menu',
     data:{
-        msg:0
+        msg:0,
+    }
+})
+
+var postPoBox = new Vue({
+    el:'#post-po-box',
+    data:{
+        show:false,
+        login:false
+    },
+    mounted(){
+        let userData = JSON.parse(localStorage.getItem('userData'))
+        if(userData){
+            this.login = true
+        }
+    },
+    methods:{
+        close(){
+            this.showPost = !this.showPost
+        },
+        go(val){
+           if(!this.login){
+                login.show = true
+                login.type = 0
+                return
+           }
+
+           if(val){
+            window.location.href = val; 
+           }else{
+            this.$toasted.show('功能开发中...',{
+                theme: 'primary',
+                position: 'top-center',
+                duration : 2000,
+                type:'error'
+            })
+           }
+        }
     }
 })
 
@@ -2915,9 +3027,6 @@ var b2AsideBar = new Vue({
             }
             
             this.getNewDmsg()
-            if(B2ClientWidth < 768){
-                window.addEventListener('popstate', this.goBack, false)
-            }
             this.updateCarts()
             
         }
@@ -2975,39 +3084,23 @@ var b2AsideBar = new Vue({
             }
             this.showType[type] = true
             this.showBox = true
-            if(B2ClientWidth < 768){
-                bodyScrollLock.lock(this.$refs.asideContainer)
-            }
+            // if(B2ClientWidth < 768){
+            //     bodyScrollLock.lock(this.$refs.asideContainer)
+            // }
             
             this.$nextTick(()=>{
                 b2RestTimeAgo(document.querySelectorAll('.user-mission-info .b2timeago'))
             })
         },
         showAc(val){
-            if(B2ClientWidth < 768){
-                let userData = JSON.parse(localStorage.getItem('userData'))
-                if(!userData){
-                    login.show = true
-                    return
-                }
-                if(val){
-                    window.location.hash = '#showUserPanel';  
-                }else{
-                    window.history.back()
-                }
-            }else{
-                if(val){
-                    this.show('user')  
-                }else{
-                    this.close()
-                }
+            let userData = JSON.parse(localStorage.getItem('userData'))
+            if(!userData){
+                login.show = true
+                return
             }
-            
-        },
-        goBack(e){
-            if(e.target.location.hash == '#showUserPanel'){
-                this.show('user')
-                this.$refs.asideContainer.className += ' aside-show';
+
+            if(val){
+                this.show('user')  
             }else{
                 this.close()
             }
@@ -3017,9 +3110,9 @@ var b2AsideBar = new Vue({
                 this.showType[key] = false
             });
             this.showBox = false
-            if(B2ClientWidth < 768){
-                bodyScrollLock.unlock(this.$refs.asideContainer)
-            }
+            // if(B2ClientWidth < 768){
+            //     bodyScrollLock.unlock(this.$refs.asideContainer)
+            // }
             
         },
         getNewDmsg(){
@@ -3029,7 +3122,7 @@ var b2AsideBar = new Vue({
                 this.locked = true
                 this.$http.post(b2_rest_url+'getNewDmsg').then(res=>{
                     this.dmsg = res.data.dmsg
-                    this.msg.count = res.data.msg
+                    topMenuLeft.count = res.data.msg
                     this.locked = false
                 })
             }
@@ -3037,15 +3130,16 @@ var b2AsideBar = new Vue({
         close(){
             if(this.$refs.asideContainer && this.$refs.asideContainer.className.indexOf('aside-show') && B2ClientWidth < 768){
                 this.$refs.asideContainer.className = this.$refs.asideContainer.className.replace(' aside-show','')
-                if(B2ClientWidth < 768){
-                    bodyScrollLock.unlock(this.$refs.asideContainer)
-                }
+                // if(B2ClientWidth < 768){
+                //     bodyScrollLock.unlock(this.$refs.asideContainer)
+                // }
+                this.showBox = false
             }else{
                 this.closeBox()
             }
         },
         goTop(){
-            this.$scrollTo('.site', 300, {offset: -50})
+            this.$scrollTo('.site', 300, {offset: 0})
         },
         login(){
             let userData = JSON.parse(localStorage.getItem('userData'))
@@ -3169,13 +3263,18 @@ var b2AsideBar = new Vue({
             },
             immediate: true,
             deep: true
+        },
+        showBox(val){
+            if(val && B2ClientWidth < 768){
+                this.$refs.asideContainer.className += ' aside-show'
+            }
         }
     }
 })
 
 function b2HiddenFilterBox(event){
     event.parentNode.parentNode.className = event.parentNode.parentNode.className.replace('b2-show','');
-    bodyScrollLock.unlock(event.parentNode.parentNode)
+    //bodyScrollLock.unlock(event.parentNode.parentNode)
 }
 
 function b2flickity(){
@@ -3271,16 +3370,7 @@ var b2SearchUser = new Vue({
             }
         }
     }
-})
-
-function b2listenHash(){
-    if(B2ClientWidth >= 768) return
-    let hash = location.hash.slice(1);
-    if(hash == 'showMenu' || hash == 'showUserPanel' || hash == 'ShowfilterBox'){
-        history.pushState("", document.title, window.location.pathname + window.location.search);
-    }
-}
-b2listenHash();
+});
 
 //精确计算
 (function () {
@@ -3446,10 +3536,22 @@ function b2HeaderTop(){
     const banner = document.querySelector('.header-banner-left');
     const header = document.querySelector('.site');
     const aside = document.querySelector('.bar-user-info');
+    const socialTop = document.querySelector('.social-top');
+    const nosub = document.querySelector('.social-no-sub');
+    const footer = document.querySelector('.mobile-footer-menu');
     if(!banner) return
+
     let h = 96
     if(B2ClientWidth < 768){
         h = 77
+    }
+
+    if(socialTop){
+        h = 113
+    }
+
+    if(nosub){
+        h = 58
     }
 
     b2scroll(function(direction,top) {
@@ -3465,6 +3567,10 @@ function b2HeaderTop(){
                 if(B2ClientWidth > 768 && aside){
                     aside.style = 'padding-top:'+(h-28)+'px'
                 }
+
+                if(footer && B2ClientWidth < 768 && footer.className.indexOf(' footer-down') === -1){
+                    footer.className += ' footer-down'
+                }
                 
               }else{
                 banner.className = banner.className.replace(' hidden','')
@@ -3472,11 +3578,14 @@ function b2HeaderTop(){
                 if(B2ClientWidth > 768 && aside){
                     aside.style = 'padding-top:'+(h+10)+'px'
                 }
+
+                if(footer && B2ClientWidth < 768){
+                    footer.className = footer.className.replace(' footer-down','')
+                }
               }
               if(header.className.indexOf(' action') === -1){
                 header.className += ' action'
-              }
-              
+              } 
         }else{
             header.className = header.className.replace(' action','')
             banner.className = banner.className.replace(' hidden','')
@@ -3538,15 +3647,34 @@ var b2weixinBind = new Vue({
 
 function b2GetQueryVariable(variable)
 {
-       var query = window.location.search.substring(1);
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
 }
+function b2removeURLParameter(url, parameter) {
+    //prefer to use l.search if you have a location/link object
+    var urlparts = url.split('?');   
+    if (urlparts.length >= 2) {
 
+        var prefix = encodeURIComponent(parameter) + '=';
+        var pars = urlparts[1].split(/[&;]/g);
+
+        //reverse iteration as may be destructive
+        for (var i = pars.length; i-- > 0;) {    
+            //idiom for string.startsWith
+            if (pars[i].lastIndexOf(prefix, 0) !== -1) {  
+                pars.splice(i, 1);
+            }
+        }
+
+        return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+    }
+    return url;
+}
 function validate(evt) {
     var theEvent = evt || window.event;
   
@@ -3597,7 +3725,7 @@ Vue.component('bind-login', {
             this.$emit('close')
         },
         showCheck(){
-            if(this.type !== 'text' && this.type !== 'luo' && this.data.username){
+            if(this.type !== 'text' && this.type !== 'luo' && this.data.username && this.show){
                 return true
             }
             return false
@@ -3680,6 +3808,30 @@ var b2bindLogin = new Vue({
             if(val){
                 this.show = true
             }
+        }
+    }
+})
+
+var b2CreditTop = new Vue({
+    el:'.credit-top',
+    data:{
+        settings:[],
+        data:''
+    },
+    mounted(){
+        if(this.$refs.creditTop){
+            this.settings = JSON.parse(this.$refs.creditTop.getAttribute('data-settings'));
+            this.getList()
+        }
+    },
+    methods:{
+        getList(){
+            this.$http.post(b2_rest_url+'getGoldTop',Qs.stringify(this.settings)).then(res=>{
+                this.data = res.data
+                this.$nextTick(()=>{
+                    this.$refs.creditTopGujia.style.display = 'none'
+                })
+            })
         }
     }
 })
